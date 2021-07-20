@@ -1,0 +1,30 @@
+name: publish
+on:
+  - push
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 15.4
+      - run: npm ci
+      - run: npm run build
+      - name: canary version
+        if: github.ref != 'refs/heads/master'
+        run: npm version $(node -p "require('./package.json').version")-$GITHUB_SHA --git-tag-version false
+      - name: canary publish
+        if: github.ref != 'refs/heads/master'
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
+          tag: canary
+      - name: publish
+        if: github.ref == 'refs/heads/master'
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public

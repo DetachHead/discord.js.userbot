@@ -1,10 +1,11 @@
 {
-  "name": "discord.js.userbot",
+  "name": "@detachhead/discord.js.userbot",
   "description": "#### Allow discord.js to login as User",
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/tsc"
   },
   "dependencies": {
     "discord.js": "^12.5.3"
@@ -17,7 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/botkalista/discord.js.userbot.git"
   },
-  "author": "",
+  "author": "detachhead",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/botkalista/discord.js.userbot/issues"
